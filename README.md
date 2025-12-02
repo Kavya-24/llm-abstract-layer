@@ -2,6 +2,9 @@
 
 A TypeScript-based abstraction layer for Large Language Model (LLM) providers, providing a unified interface for interacting with multiple LLM services like OpenAI and Google Gemini.
 
+
+Published ▶️ https://www.npmjs.com/package/llm-abstract-layer
+
 ## Features
 
 - **Unified API**: Single interface for multiple LLM providers
