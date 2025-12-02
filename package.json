@@ -2,10 +2,22 @@
   "name": "llm-abstract-layer",
   "version": "1.0.0",
   "description": "A TypeScript abstraction layer for Large Language Model providers with unified API, type safety, and extensible architecture",
-  "main": "dist/app.js",
-  "types": "dist/app.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
+    "prepublishOnly": "npm run clean && npm run build",
     "start": "node dist/app.js",
     "dev": "tsc && node dist/app.js",
     "clean": "rm -rf dist",
@@ -40,12 +52,24 @@
   "engines": {
     "node": ">=18.0.0"
   },
-  "dependencies": {
+  "peerDependencies": {
     "@google/genai": "^1.30.0",
-    "dotenv": "^17.2.3",
     "openai": "^6.9.1"
   },
+  "peerDependenciesMeta": {
+    "@google/genai": {
+      "optional": true
+    },
+    "openai": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  },
   "devDependencies": {
-    "@types/node": "^24.10.1"
+    "@types/node": "^24.10.1",
+    "@google/genai": "^1.30.0",
+    "openai": "^6.9.1"
   }
 }

@@ -17,20 +17,39 @@ A TypeScript-based abstraction layer for Large Language Model (LLM) providers, p
 ## Installation
 
 ```bash
-npm install
+npm install llm-abstract-layer
 ```
 
-### Dependencies
+Or with yarn:
 
-- `openai`: OpenAI API client
-- `@google/genai`: Google Generative AI client
-- `@types/node`: Node.js type definitions (dev dependency)
+```bash
+yarn add llm-abstract-layer
+```
+
+### Peer Dependencies
+
+This package requires the following peer dependencies:
+
+- `openai`: ^6.9.1 (for OpenAI provider)
+- `@google/genai`: ^1.30.0 (for Gemini provider)
+
+Install them based on which providers you plan to use:
+
+```bash
+# For OpenAI
+npm install openai
+
+# For Gemini
+npm install @google/genai
+
+# For both
+npm install openai @google/genai
+```
 
 ## Quick Start
 
 ```typescript
-import { LLMClient } from "./llm/client/LLMClient.js";
-import { LLMProvider, GeminiModel } from "./llm/types/provider.js";
+import { LLMClient, LLMProvider, GeminiModel } from "llm-abstract-layer";
 
 // Set your API key as environment variable
 const apiKey = process.env.GEMINI_API_KEY;
@@ -174,15 +193,6 @@ try {
 
 Built-in support for multiple languages using the i18n system.
 
-```typescript
-import { getString } from "./utils/i18Lib.js";
-
-const message = getString("LLM_ERROR_MISSING_API_KEY", {
-  language: "es",
-  args: { provider: "OpenAI" }
-});
-```
-
 **Supported Languages:**
 - English (en)
 - Spanish (es)
@@ -249,6 +259,8 @@ const response = await llmClient.complete({
 ### Multiple Providers
 
 ```typescript
+import { LLMClient, LLMProvider, OpenAIModel, GeminiModel } from "llm-abstract-layer";
+
 // OpenAI
 const openaiClient = LLMClient.builder()
   .setProvider(LLMProvider.OPENAI)
@@ -267,11 +279,17 @@ const geminiClient = LLMClient.builder()
 ### Error Handling
 
 ```typescript
+import { LLMError, AuthenticationError, RateLimitError } from "llm-abstract-layer";
+
 try {
   const response = await llmClient.complete(request);
   console.log(response.content);
 } catch (error) {
-  if (error instanceof LLMError) {
+  if (error instanceof AuthenticationError) {
+    console.error("Invalid API key");
+  } else if (error instanceof RateLimitError) {
+    console.error(`Rate limited. Retry after ${error.retryAfter}s`);
+  } else if (error instanceof LLMError) {
     console.error(`Provider: ${error.provider}`);
     console.error(`Retryable: ${error.retryable}`);
     console.error(`Message: ${error.message}`);
