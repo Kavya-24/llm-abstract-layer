@@ -1,0 +1,51 @@
+{
+  "name": "llm-abstract-layer",
+  "version": "1.0.0",
+  "description": "A TypeScript abstraction layer for Large Language Model providers with unified API, type safety, and extensible architecture",
+  "main": "dist/app.js",
+  "types": "dist/app.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "dev": "tsc && node dist/app.js",
+    "clean": "rm -rf dist",
+    "rebuild": "npm run clean && npm run build",
+    "type-check": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kavya-24/llm-abstract-layer.git"
+  },
+  "keywords": [
+    "llm",
+    "openai",
+    "gemini",
+    "ai",
+    "gpt",
+    "chatgpt",
+    "language-model",
+    "typescript",
+    "abstraction",
+    "api",
+    "builder-pattern",
+    "generative-ai"
+  ],
+  "type": "module",
+  "author": "Kavya-24",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kavya-24/llm-abstract-layer/issues"
+  },
+  "homepage": "https://github.com/Kavya-24/llm-abstract-layer#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@google/genai": "^1.30.0",
+    "dotenv": "^17.2.3",
+    "openai": "^6.9.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1"
+  }
+}

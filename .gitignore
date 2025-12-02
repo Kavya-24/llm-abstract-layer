@@ -1,0 +1,12 @@
+node_modules
+*.log
+dist
+
+
+.env
+.env.local
+package-lock.json
+.env.*.local 
+.env.development.local
+.env.test.local
+.env.production.local
